@@ -1,0 +1,15 @@
+{
+  "books": [],
+  "members": [
+    {
+      "type": "Student",
+      "name": "Nishanth C",
+      "member_id": "1000",
+      "email": "nn@gmail.com",
+      "phone": "8088538013",
+      "books_held": [],
+      "roll_no": "4RA23cs060",
+      "department": null
+    }
+  ]
+}
