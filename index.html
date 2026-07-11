@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Book Repository</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <h1>📚 Smart Book Repository</h1>
+
+    <!-- Flash Messages -->
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+        {% for message in messages %}
+            <p>{{ message }}</p>
+        {% endfor %}
+    {% endif %}
+    {% endwith %}
+
+    <hr>
+
+    <h2>Add Book</h2>
+
+    <form action="/add_book" method="POST">
+        <input type="text" name="title" placeholder="Book Title" required>
+        <input type="text" name="author" placeholder="Author" required>
+        <input type="text" name="isbn" placeholder="ISBN" required>
+
+        <button type="submit">Add Book</button>
+    </form>
+
+    <hr>
+
+    <h2>Register Student</h2>
+
+    <form action="/register_student" method="POST">
+
+        <input type="text" name="name" placeholder="Name" required>
+
+        <input type="text" name="member_id" placeholder="Member ID" required>
+
+        <input type="email" name="email" placeholder="Email" required>
+
+        <input type="text" name="phone" placeholder="Phone" required>
+
+        <input type="text" name="roll_no" placeholder="Roll Number" required>
+
+        <button type="submit">Register Student</button>
+
+    </form>
+
+    <hr>
+
+    <h2>Register Faculty</h2>
+
+    <form action="/register_faculty" method="POST">
+
+        <input type="text" name="name" placeholder="Name" required>
+
+        <input type="text" name="member_id" placeholder="Member ID" required>
+
+        <input type="email" name="email" placeholder="Email" required>
+
+        <input type="text" name="phone" placeholder="Phone" required>
+
+        <input type="text" name="department" placeholder="Department" required>
+
+        <button type="submit">Register Faculty</button>
+
+    </form>
+
+    <hr>
+
+    <h2>Issue Book</h2>
+
+    <form action="/issue" method="POST">
+
+        <input type="text" name="isbn" placeholder="ISBN" required>
+
+        <input type="text" name="member_id" placeholder="Member ID" required>
+
+        <button type="submit">Issue Book</button>
+
+    </form>
+
+    <hr>
+
+    <h2>Return Book</h2>
+
+    <form action="/return" method="POST">
+
+        <input type="text" name="isbn" placeholder="ISBN" required>
+
+        <input type="number" name="days_late" placeholder="Days Late" value="0">
+
+        <button type="submit">Return Book</button>
+
+    </form>
+
+    <hr>
+
+    <h2>Search Book</h2>
+
+    <form action="/search">
+
+        <input type="text" name="keyword" placeholder="Enter title">
+
+        <button type="submit">Search</button>
+
+    </form>
+
+    <hr>
+
+    <h2>Books</h2>
+
+    <table border="1">
+
+        <tr>
+            <th>Title</th>
+            <th>Author</th>
+            <th>ISBN</th>
+            <th>Status</th>
+        </tr>
+
+        {% for book in books %}
+
+        <tr>
+
+            <td>{{ book.title }}</td>
+
+            <td>{{ book.author }}</td>
+
+            <td>{{ book.isbn }}</td>
+
+            <td>
+
+                {% if book.is_issued %}
+                    Issued
+                {% else %}
+                    Available
+                {% endif %}
+
+            </td>
+
+        </tr>
+
+        {% endfor %}
+
+    </table>
+
+    <br>
+
+    <a href="/save">Save Data</a> |
+    <a href="/load">Load Data</a>
+
+</body>
+</html>

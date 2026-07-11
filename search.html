@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Books - Smart Book Repository</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <h1>🔍 Search Results</h1>
+
+    <form action="/search" method="GET">
+        <input
+            type="text"
+            name="keyword"
+            placeholder="Search by book title..."
+            value="{{ keyword }}"
+        >
+        <button type="submit">Search</button>
+    </form>
+
+    <br>
+
+    <table>
+        <tr>
+            <th>Title</th>
+            <th>Author</th>
+            <th>ISBN</th>
+            <th>Status</th>
+        </tr>
+
+        {% if books %}
+            {% for book in books %}
+            <tr>
+                <td>{{ book.title }}</td>
+                <td>{{ book.author }}</td>
+                <td>{{ book.isbn }}</td>
+                <td>
+                    {% if book.is_issued %}
+                        Issued
+                    {% else %}
+                        Available
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        {% else %}
+            <tr>
+                <td colspan="4">No books found.</td>
+            </tr>
+        {% endif %}
+    </table>
+
+    <br>
+
+    <a href="/">⬅ Back to Home</a>
+
+</body>
+</html>
